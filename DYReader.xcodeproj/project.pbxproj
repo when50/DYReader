@@ -8,11 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		5A2068D2286D964E000C5BEA /* DYReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A2068D1286D964E000C5BEA /* DYReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5A2068DC286D9AFF000C5BEA /* libmupdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2068DA286D9AF0000C5BEA /* libmupdf.a */; };
+		5A2068DD286D9AFF000C5BEA /* libmupdfthird.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2068DB286D9AF0000C5BEA /* libmupdfthird.a */; };
+		5A2068E4286D9BF1000C5BEA /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2068E2286D9BF1000C5BEA /* common.m */; };
+		5A2068E5286D9BF1000C5BEA /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A2068E3286D9BF1000C5BEA /* common.h */; };
+		5A2068EC286DA112000C5BEA /* DYReaderViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A2068EA286DA112000C5BEA /* DYReaderViewer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5A2068ED286DA112000C5BEA /* DYReaderViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2068EB286DA112000C5BEA /* DYReaderViewer.m */; };
+		5A2068F0286DA1C2000C5BEA /* MuDocRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2068EE286DA1C2000C5BEA /* MuDocRef.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5A2068F1286DA1C2000C5BEA /* MuDocRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A2068EF286DA1C2000C5BEA /* MuDocRef.h */; };
+		5A206927286DA81D000C5BEA /* DYChapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A206925286DA81D000C5BEA /* DYChapter.h */; };
+		5A206928286DA81D000C5BEA /* DYChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A206926286DA81D000C5BEA /* DYChapter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5A2068CE286D964E000C5BEA /* DYReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DYReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A2068D1286D964E000C5BEA /* DYReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYReader.h; sourceTree = "<group>"; };
+		5A2068DA286D9AF0000C5BEA /* libmupdf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmupdf.a; path = "libmupdf/build/debug-ios-x86_64/libmupdf.a"; sourceTree = "<group>"; };
+		5A2068DB286D9AF0000C5BEA /* libmupdfthird.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmupdfthird.a; path = "libmupdf/build/debug-ios-x86_64/libmupdfthird.a"; sourceTree = "<group>"; };
+		5A2068E2286D9BF1000C5BEA /* common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
+		5A2068E3286D9BF1000C5BEA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		5A2068EA286DA112000C5BEA /* DYReaderViewer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYReaderViewer.h; sourceTree = "<group>"; };
+		5A2068EB286DA112000C5BEA /* DYReaderViewer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DYReaderViewer.m; sourceTree = "<group>"; };
+		5A2068EE286DA1C2000C5BEA /* MuDocRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MuDocRef.m; sourceTree = "<group>"; };
+		5A2068EF286DA1C2000C5BEA /* MuDocRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuDocRef.h; sourceTree = "<group>"; };
+		5A206925286DA81D000C5BEA /* DYChapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYChapter.h; sourceTree = "<group>"; };
+		5A206926286DA81D000C5BEA /* DYChapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DYChapter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -20,6 +40,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A2068DD286D9AFF000C5BEA /* libmupdfthird.a in Frameworks */,
+				5A2068DC286D9AFF000C5BEA /* libmupdf.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +53,7 @@
 			children = (
 				5A2068D0286D964E000C5BEA /* DYReader */,
 				5A2068CF286D964E000C5BEA /* Products */,
+				5A2068D9286D9AF0000C5BEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -46,8 +69,25 @@
 			isa = PBXGroup;
 			children = (
 				5A2068D1286D964E000C5BEA /* DYReader.h */,
+				5A2068EA286DA112000C5BEA /* DYReaderViewer.h */,
+				5A2068EB286DA112000C5BEA /* DYReaderViewer.m */,
+				5A206925286DA81D000C5BEA /* DYChapter.h */,
+				5A206926286DA81D000C5BEA /* DYChapter.m */,
+				5A2068E3286D9BF1000C5BEA /* common.h */,
+				5A2068E2286D9BF1000C5BEA /* common.m */,
+				5A2068EF286DA1C2000C5BEA /* MuDocRef.h */,
+				5A2068EE286DA1C2000C5BEA /* MuDocRef.m */,
 			);
 			path = DYReader;
+			sourceTree = "<group>";
+		};
+		5A2068D9286D9AF0000C5BEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A2068DA286D9AF0000C5BEA /* libmupdf.a */,
+				5A2068DB286D9AF0000C5BEA /* libmupdfthird.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -57,6 +97,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A2068E5286D9BF1000C5BEA /* common.h in Headers */,
+				5A2068EC286DA112000C5BEA /* DYReaderViewer.h in Headers */,
+				5A206927286DA81D000C5BEA /* DYChapter.h in Headers */,
+				5A2068F1286DA1C2000C5BEA /* MuDocRef.h in Headers */,
 				5A2068D2286D964E000C5BEA /* DYReader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +112,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A2068D5286D964E000C5BEA /* Build configuration list for PBXNativeTarget "DYReader" */;
 			buildPhases = (
+				5A2068D8286D98ED000C5BEA /* ShellScript */,
 				5A2068C9286D964E000C5BEA /* Headers */,
 				5A2068CA286D964E000C5BEA /* Sources */,
 				5A2068CB286D964E000C5BEA /* Frameworks */,
@@ -93,6 +138,7 @@
 				TargetAttributes = {
 					5A2068CD286D964E000C5BEA = {
 						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -124,11 +170,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5A2068D8286D98ED000C5BEA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash build_libs.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5A2068CA286D964E000C5BEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A2068F0286DA1C2000C5BEA /* MuDocRef.m in Sources */,
+				5A2068E4286D9BF1000C5BEA /* common.m in Sources */,
+				5A206928286DA81D000C5BEA /* DYChapter.m in Sources */,
+				5A2068ED286DA112000C5BEA /* DYReaderViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +324,7 @@
 		5A2068D6286D964E000C5BEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -264,23 +335,34 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"libmupdf/build/debug-ios-x86_64",
+					"$(PROJECT_DIR)/libmupdf/build/debug-ios-x86_64",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aggrx.DYReader;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = libmupdf/include;
 			};
 			name = Debug;
 		};
 		5A2068D7286D964E000C5BEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -291,17 +373,26 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"libmupdf/build/debug-ios-x86_64",
+					"$(PROJECT_DIR)/libmupdf/build/debug-ios-x86_64",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aggrx.DYReader;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = libmupdf/include;
 			};
 			name = Release;
 		};

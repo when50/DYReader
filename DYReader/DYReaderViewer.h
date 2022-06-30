@@ -5,7 +5,7 @@
 //  Created by oneko on 2022/6/30.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 enum
 {
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSString *file;
 
 - (BOOL)openFile:(NSString *)file;
+- (UIView *)pageViewAt;
 
 @end
 

@@ -88,11 +88,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
         flattenOutline(titles, pages, root, 0);
         
         int pageNum = 0;
-        fz_try(ctx)
-            pageNum = fz_count_pages(ctx, self.doc->doc);
-        fz_catch(ctx)
-            NSLog(@"");
-        
+        pageNum = fz_count_pages(ctx, self.doc->doc);
         
         fz_drop_outline(ctx, root);
     }

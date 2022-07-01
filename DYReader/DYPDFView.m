@@ -191,6 +191,7 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
         self.docRef = docRef;
         self.pageIdx = pageIdx;
         self.docRef = docRef;
+        self.backgroundColor = UIColor.clearColor;
         [self loadPage];
     }
     return self;

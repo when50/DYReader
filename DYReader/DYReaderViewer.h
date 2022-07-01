@@ -17,9 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DYReaderViewer : NSObject
 
 @property (nonatomic, readonly) NSString *file;
+@property (nonatomic, readonly) int pageNum;
+@property (nonatomic, readonly) NSArray *chapterList;
 
 - (BOOL)openFile:(NSString *)file;
-- (UIView *)pageViewAt;
+- (UIView *)getPageViewAtChapter:(int)chapterIdx
+                            size:(CGSize)size
+                            page:(int)pageIdx;
 
 @end
 

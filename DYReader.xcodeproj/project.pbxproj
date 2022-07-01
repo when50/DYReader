@@ -18,6 +18,10 @@
 		5A2068F1286DA1C2000C5BEA /* MuDocRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A2068EF286DA1C2000C5BEA /* MuDocRef.h */; };
 		5A206927286DA81D000C5BEA /* DYChapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A206925286DA81D000C5BEA /* DYChapter.h */; };
 		5A206928286DA81D000C5BEA /* DYChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A206926286DA81D000C5BEA /* DYChapter.m */; };
+		5A206937286E97D7000C5BEA /* DYPDFView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A206935286E97D7000C5BEA /* DYPDFView.h */; };
+		5A206938286E97D7000C5BEA /* DYPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A206936286E97D7000C5BEA /* DYPDFView.m */; };
+		5A20693B286E9D90000C5BEA /* MuAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A206939286E9D90000C5BEA /* MuAnnotation.h */; };
+		5A20693C286E9D90000C5BEA /* MuAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A20693A286E9D90000C5BEA /* MuAnnotation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		5A2068EF286DA1C2000C5BEA /* MuDocRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuDocRef.h; sourceTree = "<group>"; };
 		5A206925286DA81D000C5BEA /* DYChapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYChapter.h; sourceTree = "<group>"; };
 		5A206926286DA81D000C5BEA /* DYChapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DYChapter.m; sourceTree = "<group>"; };
+		5A206935286E97D7000C5BEA /* DYPDFView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYPDFView.h; sourceTree = "<group>"; };
+		5A206936286E97D7000C5BEA /* DYPDFView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DYPDFView.m; sourceTree = "<group>"; };
+		5A206939286E9D90000C5BEA /* MuAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuAnnotation.h; sourceTree = "<group>"; };
+		5A20693A286E9D90000C5BEA /* MuAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MuAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,12 +79,16 @@
 				5A2068D1286D964E000C5BEA /* DYReader.h */,
 				5A2068EA286DA112000C5BEA /* DYReaderViewer.h */,
 				5A2068EB286DA112000C5BEA /* DYReaderViewer.m */,
+				5A206935286E97D7000C5BEA /* DYPDFView.h */,
+				5A206936286E97D7000C5BEA /* DYPDFView.m */,
 				5A206925286DA81D000C5BEA /* DYChapter.h */,
 				5A206926286DA81D000C5BEA /* DYChapter.m */,
 				5A2068E3286D9BF1000C5BEA /* common.h */,
 				5A2068E2286D9BF1000C5BEA /* common.m */,
 				5A2068EF286DA1C2000C5BEA /* MuDocRef.h */,
 				5A2068EE286DA1C2000C5BEA /* MuDocRef.m */,
+				5A206939286E9D90000C5BEA /* MuAnnotation.h */,
+				5A20693A286E9D90000C5BEA /* MuAnnotation.m */,
 			);
 			path = DYReader;
 			sourceTree = "<group>";
@@ -100,8 +112,10 @@
 				5A2068E5286D9BF1000C5BEA /* common.h in Headers */,
 				5A2068EC286DA112000C5BEA /* DYReaderViewer.h in Headers */,
 				5A206927286DA81D000C5BEA /* DYChapter.h in Headers */,
+				5A20693B286E9D90000C5BEA /* MuAnnotation.h in Headers */,
 				5A2068F1286DA1C2000C5BEA /* MuDocRef.h in Headers */,
 				5A2068D2286D964E000C5BEA /* DYReader.h in Headers */,
+				5A206937286E97D7000C5BEA /* DYPDFView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,9 +209,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A20693C286E9D90000C5BEA /* MuAnnotation.m in Sources */,
 				5A2068F0286DA1C2000C5BEA /* MuDocRef.m in Sources */,
 				5A2068E4286D9BF1000C5BEA /* common.m in Sources */,
 				5A206928286DA81D000C5BEA /* DYChapter.m in Sources */,
+				5A206938286E97D7000C5BEA /* DYPDFView.m in Sources */,
 				5A2068ED286DA112000C5BEA /* DYReaderViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

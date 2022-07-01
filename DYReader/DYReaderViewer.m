@@ -9,6 +9,7 @@
 #include "common.h"
 #import "MuDocRef.h"
 #import "DYPDFView.h"
+#import "DYChapter.h"
 
 static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_outline *outline, int level)
 {
@@ -35,6 +36,8 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 
 @property (nonatomic, strong) MuDocRef *doc;
 @property (nonatomic, copy) NSString *file;
+@property (nonatomic, assign) int pageNum;
+@property (nonatomic, strong) NSMutableArray *mChapterList;
 
 @end
 
@@ -43,12 +46,20 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.mChapterList = [NSMutableArray array];
         [self initMupdf];
     }
     return self;
 }
 
+- (NSArray *)chapterList {
+    return self.mChapterList;
+}
+
 - (BOOL)openFile:(NSString *)file {
+    self.pageNum = 0;
+    [self.mChapterList removeAllObjects];
+    
     self.file = file;
     self.doc = [[MuDocRef alloc] initWithFilename:file];
     if (!self.doc) {
@@ -89,8 +100,11 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
         NSMutableArray *pages = [[NSMutableArray alloc] init];
         flattenOutline(titles, pages, root, 0);
         
-        int pageNum = 0;
-        pageNum = fz_count_pages(ctx, self.doc->doc);
+        for (int i = 0; i < titles.count; i++) {
+            DYChapter *chapter = [DYChapter chapterWithTitle:titles[i] page:[pages[i] intValue]];
+            [self.mChapterList addObject:chapter];
+        }
+        self.pageNum = fz_count_pages(ctx, self.doc->doc);
         
         fz_drop_outline(ctx, root);
     }

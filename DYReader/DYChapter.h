@@ -11,7 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DYChapter : NSObject
 
-//@property (nonatomic, copy) NSString *
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, assign) int pageIdx;
+
++ (instancetype)chapterWithTitle:(NSString *)title page:(int)pageIdx;
 
 @end
 

@@ -9,4 +9,11 @@
 
 @implementation DYChapter
 
++ (instancetype)chapterWithTitle:(NSString *)title page:(int)pageIdx {
+    DYChapter *chapter = [DYChapter new];
+    chapter.title = title;
+    chapter.pageIdx = pageIdx;
+    return chapter;
+}
+
 @end

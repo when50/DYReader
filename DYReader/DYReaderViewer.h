@@ -21,9 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSArray *chapterList;
 
 - (BOOL)openFile:(NSString *)file;
-- (UIView *)getPageViewAtChapter:(int)chapterIdx
-                            size:(CGSize)size
-                            page:(int)pageIdx;
+- (UIView *)getPageViewAtPage:(int)pageIdx
+                         size:(CGSize)size;
 
 @end
 

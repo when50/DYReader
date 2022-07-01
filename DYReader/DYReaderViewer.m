@@ -110,9 +110,8 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     }
 }
 
-- (UIView *)getPageViewAtChapter:(int)chapterIdx
-                            size:(CGSize)size
-                            page:(int)pageIdx {
+- (UIView *)getPageViewAtPage:(int)pageIdx
+                         size:(CGSize)size {
     DYPDFView *pdfView = [[DYPDFView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)
                                                      page:pageIdx
                                                       doc:self.doc];

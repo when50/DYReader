@@ -14,7 +14,7 @@ enum
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DYReaderViewer : NSObject
+@interface DYBookReader : NSObject
 
 @property (nonatomic, readonly) NSString *file;
 @property (nonatomic, readonly) int pageNum;

@@ -5,7 +5,7 @@
 //  Created by oneko on 2022/6/30.
 //
 
-#import "DYReaderViewer.h"
+#import "DYBookReader.h"
 #include "common.h"
 #import "MuDocRef.h"
 #import "DYPDFView.h"
@@ -32,7 +32,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     }
 }
 
-@interface DYReaderViewer ()
+@interface DYBookReader ()
 
 @property (nonatomic, strong) MuDocRef *doc;
 @property (nonatomic, copy) NSString *file;
@@ -41,7 +41,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 
 @end
 
-@implementation DYReaderViewer
+@implementation DYBookReader
 
 - (instancetype)init {
     self = [super init];
@@ -112,7 +112,8 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 
 - (UIView *)getPageViewAtPage:(int)pageIdx
                          size:(CGSize)size {
-    DYPDFView *pdfView = [[DYPDFView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    DYPDFView *pdfView = [[DYPDFView alloc] initWithFrame:rect
                                                      page:pageIdx
                                                       doc:self.doc];
     return pdfView;

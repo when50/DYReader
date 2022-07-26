@@ -16,7 +16,7 @@
 		5A2068ED286DA112000C5BEA /* DYBookReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2068EB286DA112000C5BEA /* DYBookReader.m */; };
 		5A2068F0286DA1C2000C5BEA /* MuDocRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2068EE286DA1C2000C5BEA /* MuDocRef.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5A2068F1286DA1C2000C5BEA /* MuDocRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A2068EF286DA1C2000C5BEA /* MuDocRef.h */; };
-		5A206927286DA81D000C5BEA /* DYChapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A206925286DA81D000C5BEA /* DYChapter.h */; };
+		5A206927286DA81D000C5BEA /* DYChapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A206925286DA81D000C5BEA /* DYChapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5A206928286DA81D000C5BEA /* DYChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A206926286DA81D000C5BEA /* DYChapter.m */; };
 		5A206937286E97D7000C5BEA /* DYPDFView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A206935286E97D7000C5BEA /* DYPDFView.h */; };
 		5A206938286E97D7000C5BEA /* DYPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A206936286E97D7000C5BEA /* DYPDFView.m */; };

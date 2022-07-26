@@ -119,6 +119,16 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     return pdfView;
 }
 
-
+- (BOOL)switchChapter:(int)index {
+    if (index < self.chapterList.count) {
+        self.chapterIdx = index;
+        
+        DYChapter *chapter = self.chapterList[index];
+        self.pageIdx = chapter.pageIdx;
+        return YES;
+    } else {
+        return NO;
+    }
+}
 
 @end

@@ -12,6 +12,8 @@ enum
     ResourceCacheMaxSize = 128<<20    /**< use at most 128M for resource cache */
 };
 
+@class DYChapter;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DYBookReader : NSObject
@@ -25,7 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)openFile:(NSString *)file;
 - (UIView *)getPageViewAtPage:(int)pageIdx
                          size:(CGSize)size;
+- (DYChapter * __nullable)getChapterAt:(int)index;
 - (BOOL)switchChapter:(int)index;
+/**
+ * 记录切换前的章节
+ */
+- (void)recordCurrentChapter;
+/**
+ * 还原切换前的章节
+ */
+- (void)rollbackChapter;
 
 @end
 

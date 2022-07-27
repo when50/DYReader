@@ -38,6 +38,8 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 @property (nonatomic, copy) NSString *file;
 @property (nonatomic, assign) int pageNum;
 @property (nonatomic, strong) NSMutableArray *mChapterList;
+@property (nonatomic, assign) int recordChapterIdx;
+@property (nonatomic, assign) int recordPageIdx;
 
 @end
 
@@ -119,8 +121,16 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     return pdfView;
 }
 
+- (DYChapter *)getChapterAt:(int)index {
+    if (index >= 0 && index < self.chapterList.count) {
+        return self.chapterList[index];
+    } else {
+        return nil;
+    }
+}
+
 - (BOOL)switchChapter:(int)index {
-    if (index < self.chapterList.count) {
+    if (index >= 0 && index < self.chapterList.count) {
         self.chapterIdx = index;
         
         DYChapter *chapter = self.chapterList[index];
@@ -129,6 +139,16 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     } else {
         return NO;
     }
+}
+
+- (void)recordCurrentChapter {
+    self.recordChapterIdx = self.chapterIdx;
+    self.recordPageIdx = self.pageIdx;
+}
+
+- (void)rollbackChapter {
+    self.chapterIdx = self.recordChapterIdx;
+    self.pageIdx = self.recordPageIdx;
 }
 
 @end

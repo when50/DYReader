@@ -48,6 +48,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.fontSize = 14;
         self.mChapterList = [NSMutableArray array];
         [self initMupdf];
     }
@@ -95,7 +96,13 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     fz_catch(ctx)
         root = NULL;
     
+    CGRect frame = UIApplication.sharedApplication.keyWindow.bounds;
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets insets = UIApplication.sharedApplication.keyWindow.safeAreaInsets;
+        frame = CGRectInset(frame, insets.left + insets.right, insets.top + insets.bottom);
+    }
     
+    fz_layout_document(ctx, self.doc->doc, frame.size.width, frame.size.height, self.fontSize);
     if (root)
     {
         NSMutableArray *titles = [[NSMutableArray alloc] init];
@@ -112,12 +119,9 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     }
 }
 
-- (UIView *)getPageViewAtPage:(int)pageIdx
-                         size:(CGSize)size {
-    CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    DYPDFView *pdfView = [[DYPDFView alloc] initWithFrame:rect
-                                                     page:pageIdx
-                                                      doc:self.doc];
+- (UIView *)getPageViewAtPage:(int)pageIdx {
+    DYPDFView *pdfView = [[DYPDFView alloc] initWithPage:pageIdx
+                                                     doc:self.doc];
     return pdfView;
 }
 

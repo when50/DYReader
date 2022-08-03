@@ -161,7 +161,7 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
     return pix;
 }
 
-@interface DYPDFView ()
+@interface DYPDFView () <UIScrollViewDelegate>
 
 @property(nonatomic, assign) int pageIdx;
 @property(nonatomic, assign) BOOL cancel;
@@ -183,10 +183,9 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
     CGSize pageSize;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-                         page:(int)pageIdx
-                          doc:(MuDocRef *)docRef {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithPage:(int)pageIdx
+                         doc:(MuDocRef *)docRef {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         self.bouncesZoom = NO;
         self.showsVerticalScrollIndicator = NO;

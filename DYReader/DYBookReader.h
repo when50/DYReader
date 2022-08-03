@@ -23,10 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSArray *chapterList;
 @property (nonatomic, assign) int chapterIdx;
 @property (nonatomic, assign) int pageIdx;
+@property (nonatomic, assign) CGFloat fontSize;
 
 - (BOOL)openFile:(NSString *)file;
-- (UIView *)getPageViewAtPage:(int)pageIdx
-                         size:(CGSize)size;
+- (UIView *)getPageViewAtPage:(int)pageIdx;
 - (DYChapter * __nullable)getChapterAt:(int)index;
 - (BOOL)switchChapter:(int)index;
 /**

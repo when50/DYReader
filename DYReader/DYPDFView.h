@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DYPDFView : UIView
+@interface DYPDFView : UIScrollView
 
 - (instancetype)initWithFrame:(CGRect)frame
                          page:(int)pageIdx

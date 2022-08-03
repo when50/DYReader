@@ -188,6 +188,12 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
                           doc:(MuDocRef *)docRef {
     self = [super initWithFrame:frame];
     if (self) {
+        self.bouncesZoom = NO;
+        self.showsVerticalScrollIndicator = NO;
+        self.showsHorizontalScrollIndicator = NO;
+        self.delegate = self;
+        
+        [self resetZoomAnimated:NO];
         self.docRef = docRef;
         self.pageIdx = pageIdx;
         self.docRef = docRef;
@@ -195,6 +201,12 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
         [self loadPage];
     }
     return self;
+}
+
+- (void)resetZoomAnimated: (BOOL)animated {
+    self.minimumZoomScale = 1;
+    self.maximumZoomScale = 5;
+    [self setZoomScale:1 animated:animated];
 }
 
 - (void) removeFromSuperview
@@ -264,15 +276,8 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
     } else {
         self.imageView.image = image;
     }
-
-    UIImageView *imageView = self.imageView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(imageView);
-    NSArray *hConstratins = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[imageView]-|" options:0 metrics:nil views:views];
-    NSArray *vConstratins = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[imageView]-|" options:0 metrics:nil views:views];
-    [self addConstraints:hConstratins];
-    [self addConstraints:vConstratins];
     
-    [self layoutIfNeeded];
+    [self resizeImage];
 }
 
 - (void) resizeImage
@@ -298,11 +303,32 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
             [self.imageView sizeToFit];
         }
 
-//        self.contentSize = self.imageView.frame.size;
+        self.contentSize = self.imageView.frame.size;
 
         [self layoutIfNeeded];
     }
 
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGSize boundsSize = self.bounds.size;
+    CGRect frameToCenter = self.imageView.frame;
+    
+    if (frameToCenter.size.width < boundsSize.width) {
+        frameToCenter.origin.x = floor((boundsSize.width - frameToCenter.size.width) / 2);
+    } else {
+        frameToCenter.origin.x = 0;
+    }
+    
+    if (frameToCenter.size.height < boundsSize.height) {
+        frameToCenter.origin.y = floor((boundsSize.height - frameToCenter.size.height) / 2);
+    } else {
+        frameToCenter.origin.y = 0;
+    }
+    
+    self.imageView.frame = frameToCenter;
 }
 
 - (void) ensurePageLoaded

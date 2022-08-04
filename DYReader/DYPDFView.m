@@ -274,61 +274,22 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
         self.imageView.opaque = YES;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview: self.imageView];
+        [NSLayoutConstraint activateConstraints:
+            [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|"
+                                                    options:0
+                                                    metrics:nil
+                                                      views:@{@"imageView": self.imageView}]];
+        
+        [NSLayoutConstraint activateConstraints:
+            [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|"
+                                                    options:0
+                                                    metrics:nil
+                                                      views:@{@"imageView": self.imageView}]];
+        
     } else {
         self.imageView.image = image;
     }
     
-}
-
-- (void) resizeImage
-{
-    if (self.imageView) {
-        CGSize imageSize =self.imageView.image.size;
-        CGSize scale = fitPageToScreen(imageSize, self.bounds.size);
-        if (fabs(scale.width - 1) > 0.1) {
-            CGRect frame =self.imageView.frame;
-            frame.size.width = imageSize.width * scale.width;
-            frame.size.height = imageSize.height * scale.height;
-           self.imageView.frame = frame;
-
-            printf("resized view; queuing up a reload (%d)\n", self.pageIdx);
-            dispatch_async(queue, ^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    CGSize scale = fitPageToScreen(self.imageView.image.size, self.bounds.size);
-                    if (fabs(scale.width - 1) > 0.01)
-                        [self loadPage];
-                });
-            });
-        } else {
-            [self.imageView sizeToFit];
-        }
-
-        self.contentSize = self.imageView.frame.size;
-
-        [self layoutIfNeeded];
-    }
-
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    CGSize boundsSize = self.bounds.size;
-    CGRect frameToCenter = self.imageView.frame;
-    
-    if (frameToCenter.size.width < boundsSize.width) {
-        frameToCenter.origin.x = floor((boundsSize.width - frameToCenter.size.width) / 2);
-    } else {
-        frameToCenter.origin.x = 0;
-    }
-    
-    if (frameToCenter.size.height < boundsSize.height) {
-        frameToCenter.origin.y = floor((boundsSize.height - frameToCenter.size.height) / 2);
-    } else {
-        frameToCenter.origin.y = 0;
-    }
-    
-    self.imageView.frame = frameToCenter;
 }
 
 - (void) ensurePageLoaded

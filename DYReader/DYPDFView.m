@@ -243,8 +243,10 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
     printf("render page %d\n", self.pageIdx);
     [self ensureDisplaylists];
     CGSize scale = fitPageToScreen(pageSize, self.bounds.size);
+    // 按照pageSize生成图片
+    scale = CGSizeMake(1, 1);
     CGRect rect = (CGRect){{0.0, 0.0},{pageSize.width * scale.width, pageSize.height * scale.height}};
-    image_pix = renderPixmap(self.docRef->doc, page_list, annot_list, pageSize, self.bounds.size, rect, 1.0);
+    image_pix = renderPixmap(self.docRef->doc, page_list, annot_list, pageSize, pageSize, rect, 1.0);
     if (!image_pix) {
         return;
     }
@@ -276,7 +278,6 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
         self.imageView.image = image;
     }
     
-    [self resizeImage];
 }
 
 - (void) resizeImage
@@ -361,5 +362,36 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
     if (!annot_list)
         annot_list = create_annot_list(self.docRef->doc, page);
 }
+
+#pragma mark - UIScrollViewDelegate
+
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+//- (void)scrollViewDidZoom:(UIScrollView *)scrollView;
+//
+//// called on start of dragging (may require some time and or distance to move)
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
+//// called on finger up if the user dragged. velocity is in points/millisecond. targetContentOffset may be changed to adjust where the scroll view comes to rest
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset API_AVAILABLE(ios(5.0));
+//// called on finger up if the user dragged. decelerate is true if it will continue moving afterwards
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;
+//
+//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;   // called on finger up as we are moving
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt
+//
+//- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView; // called when setContentOffset/scrollRectVisible:animated: finishes. not called if not animating
+//
+- (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.imageView;
+}
+//- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view API_AVAILABLE(ios(3.2)); // called before the scroll view begins zooming its content
+//- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view atScale:(CGFloat)scale; // scale between minimum and maximum. called after any 'bounce' animations
+//
+//- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView;   // return a yes if you want to scroll to the top. if not defined, assumes YES
+//- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView;      // called when scrolling animation finished. may be called immediately if already at top
+//
+///* Also see -[UIScrollView adjustedContentInsetDidChange]
+// */
+//- (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView API_AVAILABLE(ios(11.0), tvos(11.0));
 
 @end

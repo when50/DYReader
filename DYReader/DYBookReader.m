@@ -143,6 +143,20 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     }
 }
 
+- (BOOL)switchToPage:(int)pageIdx
+             chapter:(int)chapterIdx {
+    if (chapterIdx >= 0 &&
+        chapterIdx < self.chapterList.count &&
+        pageIdx >= 0 &&
+        pageIdx < self.pageNum) {
+        self.pageIdx = pageIdx;
+        self.chapterIdx = chapterIdx;
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (void)recordCurrentChapter {
     self.recordChapterIdx = self.chapterIdx;
     self.recordPageIdx = self.pageIdx;

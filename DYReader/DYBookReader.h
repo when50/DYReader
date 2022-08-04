@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIView *)getPageViewAtPage:(int)pageIdx;
 - (DYChapter * __nullable)getChapterAt:(int)index;
 - (BOOL)switchChapter:(int)index;
+- (BOOL)switchToPage:(int)pageIdx
+             chapter:(int)chapterIdx;
 /**
  * 记录切换前的章节
  */

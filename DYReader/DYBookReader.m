@@ -59,6 +59,10 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     return self.mChapterList;
 }
 
+- (void)reopenFile {
+    [self openFile:self.file];
+}
+
 - (BOOL)openFile:(NSString *)file {
     self.pageNum = 0;
     [self.mChapterList removeAllObjects];
@@ -96,13 +100,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     fz_catch(ctx)
         root = NULL;
     
-    CGRect frame = UIApplication.sharedApplication.keyWindow.bounds;
-    if (@available(iOS 11.0, *)) {
-        UIEdgeInsets insets = UIApplication.sharedApplication.keyWindow.safeAreaInsets;
-        frame = CGRectInset(frame, insets.left + insets.right, insets.top + insets.bottom);
-    }
-    
-    fz_layout_document(ctx, self.doc->doc, frame.size.width, frame.size.height, self.fontSize);
+    fz_layout_document(ctx, self.doc->doc, self.pageSize.width, self.pageSize.height, self.fontSize);
     if (root)
     {
         NSMutableArray *titles = [[NSMutableArray alloc] init];

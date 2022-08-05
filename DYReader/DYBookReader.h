@@ -26,13 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) CGSize pageSize;
 
-- (void)layoutPageOutlines;
 - (BOOL)openFile:(NSString *)file;
 - (UIView *)getPageViewAtPage:(int)pageIdx;
 - (DYChapter * __nullable)getChapterAt:(int)index;
 - (BOOL)switchChapter:(int)index;
 - (BOOL)switchToPage:(int)pageIdx
              chapter:(int)chapterIdx;
+- (void)layoutPageOutlines;
+- (BOOL)updateFontSize:(CGFloat)fontSize;
 /**
  * 记录切换前的章节
  */

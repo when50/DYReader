@@ -48,7 +48,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.fontSize = 14;
+        self.fontSize = 18;
         self.mChapterList = [NSMutableArray array];
         [self initMupdf];
     }
@@ -70,6 +70,16 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
             self.chapterIdx = i;
             break;
         }
+    }
+}
+
+- (BOOL)updateFontSize:(CGFloat)fontSize {
+    if (self.fontSize != fontSize) {
+        self.fontSize = fontSize;
+        [self layoutPageOutlines];
+        return YES;
+    } else {
+        return NO;
     }
 }
 

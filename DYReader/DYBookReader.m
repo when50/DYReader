@@ -117,6 +117,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
         NSMutableArray *pages = [[NSMutableArray alloc] init];
         flattenOutline(titles, pages, root, 0);
         
+        [self.mChapterList removeAllObjects];
         for (int i = 0; i < titles.count; i++) {
             DYChapter *chapter = [DYChapter chapterWithTitle:titles[i] page:[pages[i] intValue]];
             [self.mChapterList addObject:chapter];

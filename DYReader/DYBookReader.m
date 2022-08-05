@@ -60,7 +60,17 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 }
 
 - (void)reopenFile {
-    [self openFile:self.file];
+    fz_bookmark bookmark = fz_make_bookmark(ctx, self.doc->doc, self.pageIdx);
+    [self onPasswordOkay];
+    self.pageIdx = fz_lookup_bookmark(ctx, self.doc->doc, bookmark);
+    
+    for (int i = 0; i < self.chapterList.count; i++) {
+        DYChapter *chapter = self.chapterList[i];
+        if (chapter.pageIdx >= self.pageIdx) {
+            self.chapterIdx = i;
+            break;
+        }
+    }
 }
 
 - (BOOL)openFile:(NSString *)file {

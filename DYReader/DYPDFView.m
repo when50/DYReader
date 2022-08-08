@@ -140,7 +140,7 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
     fz_try(ctx)
     {
         pix = fz_new_pixmap_with_bbox(ctx, fz_device_rgb(ctx), &bbox, 1);
-        fz_clear_pixmap_with_value(ctx, pix, 255);
+        fz_clear_pixmap(ctx, pix);
 
         dev = fz_new_draw_device(ctx, NULL, pix);
         fz_run_display_list(ctx, page_list, dev, &ctm, &rect, NULL);

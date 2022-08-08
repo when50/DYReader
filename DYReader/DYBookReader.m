@@ -40,6 +40,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 @property (nonatomic, strong) NSMutableArray *mChapterList;
 @property (nonatomic, assign) int recordChapterIdx;
 @property (nonatomic, assign) int recordPageIdx;
+@property (nonatomic, copy) NSString *customCss;
 
 @end
 
@@ -83,7 +84,8 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     }
 }
 
-- (BOOL)openFile:(NSString *)file {
+- (BOOL)openFile:(NSString *)file customCss:(NSString * _Nullable)customCss {
+    self.customCss = customCss;
     self.pageNum = 0;
     [self.mChapterList removeAllObjects];
     
@@ -119,7 +121,10 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
         root = fz_load_outline(ctx, self.doc->doc);
     fz_catch(ctx)
         root = NULL;
-    
+    if (self.customCss.length > 0) {
+        fz_set_user_css(ctx, self.customCss.UTF8String);
+        fz_set_use_document_css(ctx, 1);
+    }
     fz_layout_document(ctx, self.doc->doc, self.pageSize.width, self.pageSize.height, self.fontSize);
     if (root)
     {

@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) CGSize pageSize;
 
-- (BOOL)openFile:(NSString *)file;
+- (BOOL)openFile:(NSString *)file customCss:(NSString * __nullable)customCss;
 - (UIView *)getPageViewAtPage:(int)pageIdx;
 - (DYChapter * __nullable)getChapterAt:(int)index;
 - (BOOL)switchChapter:(int)index;

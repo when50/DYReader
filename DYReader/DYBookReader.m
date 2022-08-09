@@ -177,6 +177,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
         pageIdx < self.pageNum) {
         self.pageIdx = pageIdx;
         self.chapterIdx = chapterIdx;
+        NSLog(@"switch to page: %@, chapter: %@", @(pageIdx), @(chapterIdx));
         return YES;
     } else {
         return NO;

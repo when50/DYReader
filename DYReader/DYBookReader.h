@@ -32,8 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)switchChapter:(int)index;
 - (BOOL)switchToPage:(int)pageIdx
              chapter:(int)chapterIdx;
-- (void)layoutPageOutlines;
-- (BOOL)updateFontSize:(CGFloat)fontSize;
+- (void)layoutPageOutlines:(void (^)(void))completion;
+- (void)updateFontSize:(CGFloat)fontSize completion:(void (^)(BOOL))completion;
 /**
  * 记录切换前的章节
  */

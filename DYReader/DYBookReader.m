@@ -124,6 +124,8 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 }
 
 - (void)onPasswordOkay {
+    fz_layout_document(ctx, self.doc->doc, self.pageSize.width, self.pageSize.height, self.fontSize);
+    self.doc->doc->did_layout = 0;
     fz_outline *root = NULL;
     fz_try(ctx)
         root = fz_load_outline(ctx, self.doc->doc);
@@ -133,7 +135,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
         fz_set_user_css(ctx, self.customCss.UTF8String);
         fz_set_use_document_css(ctx, 1);
     }
-    fz_layout_document(ctx, self.doc->doc, self.pageSize.width, self.pageSize.height, self.fontSize);
+    
     if (root)
     {
         NSMutableArray *titles = [[NSMutableArray alloc] init];

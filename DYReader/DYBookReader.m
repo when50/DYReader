@@ -60,35 +60,41 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     return self.mChapterList;
 }
 
-- (void)layoutPageOutlines {
-    NSString *ext = self.file.pathExtension;
-    if ([ext.lowercaseString isEqualToString:@"pdf"]) {
-        return;
-    }
-    
-    fz_bookmark bookmark = fz_make_bookmark(ctx, self.doc->doc, self.pageIdx);
-    [self onPasswordOkay];
-    int findPage = fz_lookup_bookmark(ctx, self.doc->doc, bookmark);
-    if (findPage >= 0) {
-        self.pageIdx = findPage;
-    }
-    
-    for (int i = 0; i < self.chapterList.count; i++) {
-        DYChapter *chapter = self.chapterList[i];
-        if (chapter.pageIdx >= self.pageIdx) {
-            self.chapterIdx = i;
-            break;
+- (void)layoutPageOutlines:(void (^)(void))completion {
+    dispatch_async(queue, ^{
+        NSString *ext = self.file.pathExtension;
+        if ([ext.lowercaseString isEqualToString:@"pdf"]) {
+            return;
         }
-    }
+        
+        fz_bookmark bookmark = fz_make_bookmark(ctx, self.doc->doc, self.pageIdx);
+        [self onPasswordOkay];
+        int findPage = fz_lookup_bookmark(ctx, self.doc->doc, bookmark);
+        if (findPage >= 0) {
+            self.pageIdx = findPage;
+            for (int i = 0; i < self.chapterList.count; i++) {
+                DYChapter *chapter = self.chapterList[i];
+                if (chapter.pageIdx >= self.pageIdx) {
+                    self.chapterIdx = i;
+                    break;
+                }
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion();
+        });
+    });
 }
 
-- (BOOL)updateFontSize:(CGFloat)fontSize {
+- (void)updateFontSize:(CGFloat)fontSize completion:(void (^)(BOOL))completion {
     if (self.fontSize != fontSize) {
         self.fontSize = fontSize;
-        [self layoutPageOutlines];
-        return YES;
+        
+        [self layoutPageOutlines:^{
+            completion(YES);
+        }];
     } else {
-        return NO;
+        completion(NO);
     }
 }
 

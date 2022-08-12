@@ -61,6 +61,11 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 }
 
 - (void)layoutPageOutlines {
+    NSString *ext = self.file.pathExtension;
+    if ([ext.lowercaseString isEqualToString:@"pdf"]) {
+        return;
+    }
+    
     fz_bookmark bookmark = fz_make_bookmark(ctx, self.doc->doc, self.pageIdx);
     [self onPasswordOkay];
     int findPage = fz_lookup_bookmark(ctx, self.doc->doc, bookmark);

@@ -198,7 +198,9 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
         self.docRef = docRef;
         self.backgroundColor = UIColor.clearColor;
         self.opaque = NO;
-        [self loadPage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadPage];
+        });
     }
     return self;
 }

@@ -228,6 +228,8 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
 
 - (void) loadPage
 {
+    assert(NSThread.currentThread == NSThread.mainThread);
+    
     if (self.pageIdx < 0 || self.pageIdx >= fz_count_pages(ctx, self.docRef->doc))
         return;
     dispatch_async(queue, ^{
@@ -275,22 +277,30 @@ static fz_pixmap *renderPixmap(fz_document *doc, fz_display_list *page_list, fz_
         self.imageView.opaque = YES;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview: self.imageView];
-        [NSLayoutConstraint activateConstraints:
-            [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|"
-                                                    options:0
-                                                    metrics:nil
-                                                      views:@{@"imageView": self.imageView}]];
-        
-        [NSLayoutConstraint activateConstraints:
-            [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|"
-                                                    options:0
-                                                    metrics:nil
-                                                      views:@{@"imageView": self.imageView}]];
-        
     } else {
         self.imageView.image = image;
     }
     
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGRect rect = self.imageView.frame;
+    rect.size = self.imageView.image.size;
+    
+    CGFloat width = rect.size.width;
+    CGFloat height = rect.size.height;
+    
+    if (width > 0 && height > 0) {
+        CGFloat wScale = self.bounds.size.width / width;
+        CGFloat hScale = self.bounds.size.height / height;
+        CGFloat scale = wScale < hScale ? wScale : hScale;
+        
+        rect.size = CGSizeMake(scale * width, scale * height);
+        rect.origin = CGPointMake((self.bounds.size.width - rect.size.width) * 0.5, (self.bounds.size.height - rect.size.height) * 0.5);
+        self.imageView.frame = rect;
+    }
 }
 
 - (void) ensurePageLoaded

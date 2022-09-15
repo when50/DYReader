@@ -154,6 +154,7 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
             [self.mChapterList addObject:chapter];
         }
         self.pageNum = fz_count_pages(ctx, self.doc->doc);
+        printf("book page: %d\n", self.pageNum);
         
         fz_drop_outline(ctx, root);
     }
@@ -208,6 +209,42 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 - (void)rollbackChapter {
     self.chapterIdx = self.recordChapterIdx;
     self.pageIdx = self.recordPageIdx;
+}
+
+- (int)getChapterIndexWithPageIndex:(int)pageIndex {
+    int chapterIndex = 0;
+    for (int i = 0; i < self.chapterList.count; i++) {
+        DYChapter *chapter = self.chapterList[i];
+        if (chapter.pageIdx >= pageIndex) {
+            chapterIndex = i;
+            break;
+        }
+    }
+    return chapterIndex;
+}
+
+- (int)chapterIndexWithProgress:(float)progress {
+    if (self.chapterList.count > 0) {
+        return (int)((self.chapterList.count - 1) * progress);
+    } else {
+        return 0;
+    }
+}
+
+- (float)chapterProgress:(int)chapterIndex {
+    if (self.chapterList.count > 0) {
+        return (float)chapterIndex / (float)(self.chapterList.count - 1);
+    } else {
+        return 0;
+    }
+}
+
+- (BOOL)isValidPageIndex:(int)pageIndex {
+    return pageIndex >= 0 && pageIndex < self.pageNum;
+}
+
+- (BOOL)isValidChapterIndex:(int)chapterIndex {
+    return chapterIndex >= 0 && chapterIndex < self.chapterList.count;
 }
 
 @end

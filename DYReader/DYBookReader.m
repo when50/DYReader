@@ -11,6 +11,8 @@
 #import "DYPDFView.h"
 #import "DYChapter.h"
 
+dispatch_queue_t readerQueue;
+
 static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_outline *outline, int level)
 {
     char indent[8*4+1];
@@ -40,7 +42,6 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
 @property (nonatomic, strong) NSMutableArray *mChapterList;
 @property (nonatomic, assign) int recordChapterIdx;
 @property (nonatomic, assign) int recordPageIdx;
-@property (nonatomic, copy) NSString *customCss;
 
 @end
 
@@ -98,30 +99,38 @@ static void flattenOutline(NSMutableArray *titles, NSMutableArray *pages, fz_out
     }
 }
 
-- (BOOL)openFile:(NSString *)file customCss:(NSString * _Nullable)customCss {
-    self.customCss = customCss;
+- (void)openFile:(NSString *)file completion:(nonnull void (^)(BOOL))completion {
     self.pageNum = 0;
     [self.mChapterList removeAllObjects];
     
     self.file = file;
-    self.doc = [[MuDocRef alloc] initWithFilename:file];
-    if (!self.doc) {
-        NSLog(@"Cannot open document: %@", file);
-        return NO;
-    }
-
-    if (fz_needs_password(ctx, self.doc->doc)) {
-        NSLog(@"file need password: %@", file);
-        return NO;
-    } else {
-        [self onPasswordOkay];
-        return YES;
-    }
+    
+    dispatch_async(readerQueue, ^{
+        BOOL successed = NO;
+        self.doc = [[MuDocRef alloc] initWithFilename:file];
+        if (self.doc) {
+            if (fz_needs_password(ctx, self.doc->doc)) {
+                NSLog(@"file need password: %@", file);
+            } else {
+                [self onPasswordOkay];
+                successed = YES;
+            }
+        }
+        if (!successed) {
+            NSLog(@"file open failed");
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion) {
+                completion(successed);
+            }
+        });
+    });
 }
 
 - (void)initMupdf {
     static dispatch_once_t token;
     dispatch_once(&token, ^{
+        readerQueue = dispatch_queue_create("com.aggrx.readerQueue", NULL);
         queue = dispatch_queue_create("com.aggrx.mupdf.queue", NULL);
         ctx = fz_new_context(NULL, NULL, ResourceCacheMaxSize);
         fz_register_document_handlers(ctx);

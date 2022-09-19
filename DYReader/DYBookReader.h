@@ -16,7 +16,7 @@ enum
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol DYBookReaderProtocol
+@protocol DYBookReaderProtocol <NSObject>
 
 @property (nonatomic, readonly) NSString *file;
 @property (nonatomic, readonly) int pageNum;
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) CGSize pageSize;
 
-- (BOOL)openFile:(NSString *)file customCss:(NSString * __nullable)customCss;
+- (void)openFile:(NSString *)file completion:(void (^)(BOOL))completion;
 - (UIView *)getPageViewAtPage:(int)pageIdx;
 - (DYChapter * __nullable)getChapterAt:(int)index;
 - (BOOL)switchChapter:(int)index;
@@ -74,8 +74,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int pageIdx;
 @property (nonatomic, assign) CGFloat fontSize;
 @property (nonatomic, assign) CGSize pageSize;
+@property (nonatomic, copy) NSString *customCss;
 
-- (BOOL)openFile:(NSString *)file customCss:(NSString * __nullable)customCss;
+- (void)openFile:(NSString *)file completion:(void (^)(BOOL))completion;
 - (UIView *)getPageViewAtPage:(int)pageIdx;
 - (DYChapter * __nullable)getChapterAt:(int)index;
 - (BOOL)switchChapter:(int)index;
